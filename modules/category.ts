@@ -1,7 +1,9 @@
+import { strict } from "assert/strict";
+
 /**
- * CategoryItem
+ * CategoryItem Model
  */
-interface categoryItem {
+type categoryItem ={
     id: number,
     name: string,
     parentId: number,
@@ -29,19 +31,17 @@ export function Category(item: categoryItem) {
  * @returns categoryItem
  */
 export function getTree(list: Array <categoryItem> ): categoryItem {
-    const mapKey = 'treeNode';
-    let map = {};
-    for (var item of list) {
-        item.items = [];
+    const mapKey = 'treeNode' as const;
+    let map = new Object();
+    for (let item of list) {
+        item.items = new Array<categoryItem>();
         map[item.id] = item;
-        var parent = item.parentId || mapKey
-        if (!map[parent]) {
-            map[parent] = {
-                items: []
-            };
-        }
+        let parent = item.parentId || mapKey
+        if (!map[parent])
+            map[parent] = { items: [] }
         map[parent].items.push(item);
     }
+    console.log(map)
     return map[mapKey].items;
 }
 /**
@@ -49,10 +49,9 @@ export function getTree(list: Array <categoryItem> ): categoryItem {
  * @param items 
  */
 export function printCategoryTree(items: categoryItem) {
-    const rep = "  ";
+    const rep = "  " as const;
     if (Array.isArray(items) && items.length != 0) {
         items.forEach(function (e) {
-
             console.log(`${rep.repeat(e.lvl-1)} L ${e.name}`)
             var list = e.items;
             if (list.length !== 0) 
@@ -60,6 +59,34 @@ export function printCategoryTree(items: categoryItem) {
         })
     }
 }
+
+export function getTreeHtml(items: categoryItem, html?:Array<string>, bl?: number) : Array<string>{
+    if(html === undefined)
+        html = [];
+    if(bl === undefined)
+        bl = 0;
+    if (Array.isArray(items) && items.length != 0) {
+        items.forEach(function (e) {
+            
+            var list = e.items;
+            // if(bl === 0){
+            //     html.push(`<li>${e.name}</li>`)
+            //     bl = 1;
+            // }else{
+                if (list.length !== 0) {
+                    html.push(`<li>${e.name}<ul>`);
+                    bl = 0;    
+                    getTreeHtml(list,html,bl)
+                }else{
+                    html.push(`<li>${e.name}</li>`)
+                }
+            // }
+                      
+        })
+    }
+    return html;
+}
+
 
 /**
  * 샘플데이터 
@@ -69,13 +96,14 @@ export function getCategorySampleData(): Array <categoryItem> {
     const array = new Array <categoryItem> ();
     array.push(new Category({id: 1,name: '개발',parentId: 0,lvl: 1}));
     array.push(new Category({id: 2,name: '웹',parentId: 1,lvl: 2}));
-    array.push(new Category({id: 3,name: '하드웨어',parentId: 1,lvl: 2}));
+    array.push(new Category({id: 13,name: '하드웨어',parentId: 1,lvl: 2}));
     array.push(new Category({id: 4,name: '프론트엔드',parentId: 2, lvl: 3}));
     array.push(new Category({id: 5,name: '백엔드',parentId: 2,lvl: 3 }));
     array.push(new Category({id: 6,name: '일상', parentId: 0, lvl: 1 }));
     array.push(new Category({id: 7,name: '일기장',parentId: 6,lvl: 2 }));
     return array;
 }
+
 
 
 
