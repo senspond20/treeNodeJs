@@ -51,7 +51,12 @@ export function getTree(list : Array<categoryItem>) : categoryItem {
 export function getStr(items : categoryItem){
     if(Array.isArray(items) && items.length !=0){
         items.forEach(function(e){
+            //`${'  '.repeat(e.level-1)} L ${e.name}\n`
             console.log(e.name);
+            var list = e.items;
+            if(list.length !=0){
+                getStr(list)
+            }
         })
     }
 }
