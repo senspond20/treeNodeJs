@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "ts-node main.ts"
+    "dev": "ts-node main.ts",
+    "serve": "ts-node server.ts"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/senspond20/treeNodeJs/issues"
   },
-  "homepage": "https://github.com/senspond20/treeNodeJs#readme"
+  "homepage": "https://github.com/senspond20/treeNodeJs#readme",
+  "devDependencies": {
+    "@types/node": "^15.0.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

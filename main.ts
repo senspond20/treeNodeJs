@@ -1,15 +1,21 @@
-import {getCategorySampleData, getTree,getStr} from './modules/category';
+import {getCategorySampleData, getTree, printCategoryTree} from './modules/category';
+// import { getPrettyJsonObject } from './modules/jsonUtils';
 
 const data = getCategorySampleData();
 console.log(data)
 
 const tree = getTree(data);
+const prettyJsonStr = JSON.stringify(tree,null,2);
+console.log(prettyJsonStr)
 
-console.log(tree)
+console.log('=================================')
+printCategoryTree(tree);
 
-// console.log(getStr(data))
-console.log(getStr(tree))
+
+
+
 // var str = '';
+
 // getStr(tree,str);
 // console.log(str);
 

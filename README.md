@@ -3,6 +3,7 @@
 
 ```
 $ npm install --save-dev typescript ts-node
+$ npm i --save-dev @types/node
 ```
 
 +run
