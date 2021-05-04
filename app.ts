@@ -5,7 +5,7 @@ const print = data =>console.log("=======================\n%d->", count++, JSON.
 
 
 // 노드 생성
-const node = new HierarchyNode<String>("루트입니다");
+const node = new HierarchyNode<String>("<루트입니다>");
 print(node);
 
 const node1 = node.appendToChild("자식1입니다");

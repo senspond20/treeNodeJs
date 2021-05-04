@@ -71,6 +71,16 @@ class HierarchyNode<T> implements HierarchyNodeInterface<T>{
 
         return children;
     }
+    /**
+     * 자식노드를 찾는다.
+     * @param T 
+     * @param data 
+     * @returns 
+     */
+    public findChild(data : T) : HierarchyNode<T> {
+        
+        return null;
+    }
 }
 export default HierarchyNode;
 
