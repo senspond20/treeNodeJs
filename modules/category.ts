@@ -1,5 +1,3 @@
-import { strict } from "assert/strict";
-
 /**
  * CategoryItem Model
  */
