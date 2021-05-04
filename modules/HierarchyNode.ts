@@ -1,9 +1,7 @@
-
 /**
- * 
+ * 인터페이스 정의
  */
 interface HierarchyNodeInterface<T>{
-    // data : T
     appendToChild(data : T) : Object
 }
 
@@ -29,10 +27,10 @@ class HierarchyNode<T> implements HierarchyNodeInterface<T>{
         return this.data;
     }
     public getChild(){
-        return this.data;
+        return this.child;
     }
     public getSibling(){
-        return this.data;
+        return this.sibling;
     }
     /**
      * 자식노드 추가
@@ -57,6 +55,21 @@ class HierarchyNode<T> implements HierarchyNodeInterface<T>{
             return this.sibling;
         }
         return this.sibling.appendToSibling(data);
+    }
+    /**
+     * 자식들 리스트를 가져온다
+     * @returns 
+     */
+    public getChildren() : Array<HierarchyNode<T>> {
+        let children = new Array<HierarchyNode<T>>();
+        if(this.child == null) return [];
+        let tempChild = this.child;
+        while(tempChild !=null){
+            children.push(tempChild);
+            tempChild = tempChild.getSibling();
+        }
+
+        return children;
     }
 }
 export default HierarchyNode;

@@ -17,3 +17,6 @@ node1.appendToChild("자식1의 자식1입니다");
 node1.appendToChild("자식1의 자식2입니다");
 print(node);
 
+print(node1.getChildren());
+
+
