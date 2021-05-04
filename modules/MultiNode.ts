@@ -1,24 +1,34 @@
+const USE_DEBUG = true;
+
 class MultiNode<T>{
     private data : T
-    private children : Array<MultiNode<T>>   // 자식노드
+    private children : Array<MultiNode<T>>  // 자식노드 리스트
 
-    // 생성자
+    /**
+     * 생성자
+     * @param data 
+     */
     constructor(data : T){
         this.data = data;
         this.children = null;
     }
-    /**
-     * getter
-     * @returns 
-     */
+   /**
+    * getter
+    */
     public getData(){
-        return (this !=null) ? this.data : null;
+        return this.data;
     }
     public getChildren(){
-        return (this !=null) ? this.children : null;
+        return this.children;
     }
+    /**
+     * setter
+     */
     public setDate(data : T){
          this.data = data;
+    }
+    public setChildern(children : Array<MultiNode<T>>){
+        this.children = children;
     }
 
     /**
@@ -35,7 +45,7 @@ class MultiNode<T>{
          return childNode;
     }
     /**
-     * 하위 자식노드에서 탐색
+     * 하위 자식노드에서 탐색 (탐색결과 없으면 null 리턴)
      * @param data 
      * @returns 
      */
@@ -54,10 +64,10 @@ class MultiNode<T>{
         //                         return true;
         //                     }
         //                  });
-        return find || undefined
+        return find || null
     }
     /**
-     * 모든 자식노드에서 탐색 (재귀)
+     * 모든 자식노드에서 탐색 (재귀) (탐색결과 없으면 null 리턴)
      * @param data 
      * @returns 
      */
@@ -65,9 +75,7 @@ class MultiNode<T>{
         return this.findChildAllRec(this.getChildren(), data, 1);
     }
     private findChildAllRec(array :Array<MultiNode<T>>, data : T, lvl:number) : MultiNode<T>{
-        
         let find : MultiNode<T>;
-   
         for(let item of array){
             if(item.getData() == data)
                 find = item;
@@ -80,11 +88,9 @@ class MultiNode<T>{
                 }
             }
         }
-        console.log(`${lvl}`)
-        return find || undefined
+        if(USE_DEBUG) console.log(`${lvl}`)
+        return find || null
     }
-
-    
 }
 
 export default MultiNode;
