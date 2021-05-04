@@ -12,13 +12,13 @@ class MultiNode<T>{
      * @returns 
      */
     public getData(){
-        return this.data;
+        return (this !=null) ? this.data : null;
     }
     public getChildren(){
-        return this.children;
+        return (this !=null) ? this.children : null;
     }
     public setDate(data : T){
-        this.data = data;
+         this.data = data;
     }
 
     /**
@@ -43,38 +43,45 @@ class MultiNode<T>{
         let find : MultiNode<T>;
 
         const array = this.getChildren();
-        for(var i =0; i < array.length; i ++){
-            if(array[i].getData() == data){
-                find = array[i]
-            }
+        for(let item of array){
+            if(item.getData() == data)
+                find = item;
         }
+            
         // array.filter(function(item){
         //                     count++;
         //                     if(item.getData() == data){
         //                         return true;
         //                     }
         //                  });
-        return find;
+        return find || undefined
     }
     /**
      * 모든 자식노드에서 탐색 (재귀)
      * @param data 
      * @returns 
      */
-    public findChildAll(data : T){
-        return this.findChildAllRec(this.getChildren(), data);
+    public findChildAll(data : T) : MultiNode<T>{
+        return this.findChildAllRec(this.getChildren(), data, 1);
     }
-    private findChildAllRec(array :Array<MultiNode<T>>, data : T){
-        let finder = array.filter(item => item.getData() == data );
-        if(finder.length == 0){
+    private findChildAllRec(array :Array<MultiNode<T>>, data : T, lvl:number) : MultiNode<T>{
+        
+        let find : MultiNode<T>;
+   
+        for(let item of array){
+            if(item.getData() == data)
+                find = item;
+        }
+        if( find === undefined){
             for(let item of array ){
                 const children = item.getChildren();
                 if(Array.isArray(children)){
-                    return this.findChildAllRec(children, data);
+                    return this.findChildAllRec(children, data,++lvl);
                 }
             }
         }
-        return finder;
+        console.log(`${lvl}`)
+        return find || undefined
     }
 
     

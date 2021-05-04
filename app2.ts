@@ -24,5 +24,9 @@ console.log("=======================================================")
 console.log(root.findChild("자식3입니다").getData() == "자식3입니다")
 console.log("=======================================================")
 
-const findNode = root.findChildAll("자식112입니다");
+const findNode = root.findChildAll("자식11233입니다");
+console.log(findNode)
+console.log(findNode.getData())
 console.log(root.findChildAll("자식112입니다"))
+
+console.log(root.findChildAll("자식11입니다"))
